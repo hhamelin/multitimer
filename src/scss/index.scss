@@ -154,11 +154,26 @@ html, body, #root {
   }
 }
 
+.app-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--bg-engine-canvas);
+
+  @media (max-width: 599px) {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+}
+
 // Single Screen App Wrapper
 .app-wrapper {
-  height: 100vh;
-  max-height: 100vh;
-  width: 100vw;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
   padding: 8px 12px;
   // Safe-area padding for notched phones
   padding-left: max(12px, env(safe-area-inset-left));
@@ -171,8 +186,7 @@ html, body, #root {
 
   @media (max-width: 599px) {
     height: auto;
-    min-height: 100dvh;
-    max-height: none;
+    min-height: 0;
     overflow: visible;
     padding: 6px 8px;
     padding-bottom: max(32px, env(safe-area-inset-bottom));

@@ -42,44 +42,46 @@ export function App() {
   };
 
   return (
-    <div className="app-wrapper">
+    <div className="app-container">
       <PortfolioReturnBanner />
-      <HeaderToolbar
-        timerCount={timers.length}
-        selectedCount={selectedCount}
-        isAllSelected={isAllSelected}
-        plusMinusMode={plusMinusMode}
-        onTogglePlusMinus={handleTogglePlusMinus}
-        currentViewMode={currentViewMode}
-        onSelectViewMode={setViewModeOverride}
-        theme={theme}
-        onToggleTheme={toggleTheme}
-        onSelectAllToggle={handleSelectAllToggle}
-        onPlayPauseSelected={playPauseSelected}
-        onAddTimeSelected={addTimeSelected}
-        onManualTimeSelected={setManualTimeSelected}
-        onAddTimer={() => addTimer()}
-        onClearSelected={clearSelected}
-        onDeleteSelected={deleteSelected}
-      />
-
-      <main className="main-content">
-        <TimerGrid
-          timers={timers}
+      <div className="app-wrapper">
+        <HeaderToolbar
+          timerCount={timers.length}
+          selectedCount={selectedCount}
+          isAllSelected={isAllSelected}
           plusMinusMode={plusMinusMode}
-          viewMode={currentViewMode}
-          onToggleSelect={toggleSelect}
-          onTogglePlayPause={togglePlayPause}
-          onAddTime={addTime}
-          onSetManualTime={setManualTime}
-          onClearTimer={clearTimer}
-          onDeleteTimer={deleteTimer}
-          onUpdateName={updateTimerName}
-          onReorderTimers={reorderTimers}
+          onTogglePlusMinus={handleTogglePlusMinus}
+          currentViewMode={currentViewMode}
+          onSelectViewMode={setViewModeOverride}
+          theme={theme}
+          onToggleTheme={toggleTheme}
+          onSelectAllToggle={handleSelectAllToggle}
+          onPlayPauseSelected={playPauseSelected}
+          onAddTimeSelected={addTimeSelected}
+          onManualTimeSelected={setManualTimeSelected}
           onAddTimer={() => addTimer()}
+          onClearSelected={clearSelected}
+          onDeleteSelected={deleteSelected}
         />
-      </main>
-      <Footer />
+
+        <main className="main-content">
+          <TimerGrid
+            timers={timers}
+            plusMinusMode={plusMinusMode}
+            viewMode={currentViewMode}
+            onToggleSelect={toggleSelect}
+            onTogglePlayPause={togglePlayPause}
+            onAddTime={addTime}
+            onSetManualTime={setManualTime}
+            onClearTimer={clearTimer}
+            onDeleteTimer={deleteTimer}
+            onUpdateName={updateTimerName}
+            onReorderTimers={reorderTimers}
+            onAddTimer={() => addTimer()}
+          />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }

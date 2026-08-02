@@ -37,15 +37,22 @@ export function PortfolioReturnBanner() {
         (referrer.includes('localhost') && !isInternalReferrer) ||
         (referrer.includes('127.0.0.1') && !isInternalReferrer));
 
+    const navEntry =
+      typeof performance !== 'undefined' && performance.getEntriesByType
+        ? (performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined)
+        : undefined;
+    const isReload = navEntry?.type === 'reload';
+
     if (fromReferrer || (fromParam && !isInternalReferrer)) {
       sessionStorage.setItem('from_portfolio', 'true');
-      sessionStorage.removeItem('from_portfolio_dismissed');
+      if (!isReload) {
+        sessionStorage.removeItem('from_portfolio_dismissed');
+      }
       if (fromReferrer) {
         sessionStorage.setItem('portfolio_url', document.referrer);
       }
     } else if (!isInternalReferrer && !fromParam) {
       sessionStorage.removeItem('from_portfolio');
-      sessionStorage.removeItem('from_portfolio_dismissed');
     }
 
     const isDismissed =
