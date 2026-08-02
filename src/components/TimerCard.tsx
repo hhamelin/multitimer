@@ -73,16 +73,26 @@ export const TimerCard: React.FC<TimerCardProps> = ({
     statusText = 'RUNNING';
   }
 
+  const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    const interactive = target.closest('button, input, label, select, textarea, a, [data-no-card-select]');
+    if (!interactive) {
+      onToggleSelect(timer.id);
+    }
+  };
+
   return (
     <>
       <div
         className={`timer-card variant-${variant} ${timer.isSelected ? 'selected' : ''} ${
           timer.isRunning ? 'running' : ''
         } ${timer.isExpired ? 'expired' : ''} mode-${viewMode}`}
+        onClick={handleCardClick}
+        style={{ cursor: 'pointer' }}
       >
         <div className="card-top-bar">
           <div className="left-controls">
-            <span className="drag-handle" {...dragHandleProps} title="Drag to reorder">
+            <span className="drag-handle" {...dragHandleProps} title="Drag to reorder" data-no-card-select>
               <GripVertical size={16} />
             </span>
             <label className="checkbox-container">
@@ -111,6 +121,7 @@ export const TimerCard: React.FC<TimerCardProps> = ({
                 className="timer-name-display"
                 onClick={() => setIsEditingName(true)}
                 title="Click to rename"
+                data-no-card-select
               >
                 {timer.name}
               </span>
